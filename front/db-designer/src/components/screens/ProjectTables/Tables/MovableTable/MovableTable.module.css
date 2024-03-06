@@ -1,0 +1,28 @@
+.draggable {
+    position: absolute;
+    min-width: 200px;
+    min-height: 100px;
+    background-color: white;
+    cursor: grab;
+    user-select: none;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    border-width: 2px;
+}
+
+.buttonsSet {
+    display: inline;
+}
+
+.buttonsSet li {
+    display: inline;
+    padding: 10px;
+}
+
+.editTableDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

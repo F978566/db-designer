@@ -1,0 +1,12 @@
+export const IDLE = 'idle';
+export const LOGOUT = 'logout';
+export const LOGIN = 'login';
+export const PENDING_LOGIN = 'pendingLogin';
+export const CHECK_AUTH = 'checkAuth';
+export const PENDING_CHECK_AUTH = 'pendingCheckAuth';
+export const LOAD_USER = 'loadUser';
+export const PENDING_LOAD_USER = 'pendingLoadUser';
+export const SIGNUP = 'signup';
+export const PENDING_SIGNUP = 'pendingSignup';
+export const VERIFY = 'verify';
+export const PENDING_VERIFY = 'pendingVerify';
