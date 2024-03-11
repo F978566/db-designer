@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "djoser",
     "corsheaders",
+    'drf_yasg',
     
-    "api.apps.ApiConfig",
+    "src.api",
+    "src.user",
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "dbdesigner.wsgi.application"
-AUTH_USER_MODEL = "api.User"
+AUTH_USER_MODEL = "user.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -93,8 +95,8 @@ DATABASES = {
         'NAME': f'{os.getenv("POSTGRES_DATABASE")}',
         'USER': f'{os.getenv("POSTGRES_USERNAME")}',
         'PASSWORD': f'{os.getenv("POSTGRES_PASSWORD")}',
-        'HOST': f'{os.getenv("POSTGRES_HOST")}',
-        'PORT': f'{os.getenv("POSTGRES_PORT")}',
+        # 'HOST': f'{os.getenv("POSTGRES_HOST")}',
+        # 'PORT': f'{os.getenv("POSTGRES_PORT")}',
     }
 }
 
@@ -128,9 +130,9 @@ DJOSER = {
     "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://localhost:8000/google", "http://localhost:8000/facebook"],
     "SERIALIZERS": {
-        "user_create": "api.serializers.UserCreateSerializer",
-        "user": "api.serializers.UserCreateSerializer",
-        "current_user": "api.serializers.UserCreateSerializer",
+        "user_create": "src.api.serializers.UserCreateSerializer",
+        "user": "src.api.serializers.UserCreateSerializer",
+        "current_user": "src.api.serializers.UserCreateSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     }
 }

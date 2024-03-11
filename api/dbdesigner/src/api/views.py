@@ -24,7 +24,6 @@ from .permissions import IsAdminOrReadOnly, IsOwner
 
 class Logout(APIView):
     def get(self, request, format=None):
-        # simply delete the token to force a login
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
@@ -38,6 +37,7 @@ class Logout(APIView):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    """User projects"""
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner ]
     queryset = Project.objects.all()
@@ -50,12 +50,20 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
 
 class TableViewSet(viewsets.ModelViewSet):
+    """
+    List of tables in the user's project
+    """
     queryset = Table.objects.all()
     serializer_class = TableSerializer
     permission_classes = [permissions.IsAuthenticated, ]
+    
+    def get_queryset(self):
+        queryset = Table.objects.filter(project__user=self.request.user)
+        return queryset
 
     @action(methods=['get'], url_path='project-tables/(?P<project>\w+)', detail=False)
     def projectsTable(self, request, *args, **kwargs):
+        """Project """
         tables = Table.objects.filter(project=kwargs.get('project'), project__user=request.user)
         return Response(TableSerializer(tables, many=True).data)
     

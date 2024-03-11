@@ -22,8 +22,6 @@ router.register('relationship', RelationshipViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('auth/', include('djoser.urls')),/
-    # path('auth/', include('djoser.social.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     re_path(r'^logout/', Logout.as_view()),
