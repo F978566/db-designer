@@ -18,7 +18,7 @@ class Project(CommonInfo):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-            return self.name
+            return f'{self.name} by user {self.user}'
 
 
 class Table(CommonInfo):
@@ -26,7 +26,7 @@ class Table(CommonInfo):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} to {self.project}'
 
 
 class DataType(CommonInfo):

@@ -13,11 +13,13 @@ from .models import (
 class UserAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'email']
 
+
 class DataTypeAdmin(admin.ModelAdmin):
     list_display = ["name"]
     list_display_links = ["name"]
     search_fields = ["name"]
     list_filter = ["name"]
+
     
 class ColumnAdmin(admin.ModelAdmin):
     list_display = ["name", "table"]

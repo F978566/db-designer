@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
+from rest_framework.validators import UniqueTogetherValidator
 from django.contrib.auth import get_user_model
 
 from .models import (
@@ -43,6 +44,12 @@ class RelationshipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Relationship
         fields = '__all__'
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Relationship.objects.all(),
+                fields=['from_column', 'to_column', 'from_table', 'to_table']
+            )
+        ]
 
 
 class RelationshipTypeSerializer(serializers.ModelSerializer):

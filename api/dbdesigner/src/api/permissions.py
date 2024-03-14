@@ -9,6 +9,11 @@ class IsAdminOrReadOnly(permissions.BasePermission):
         return request.user and request.user.is_staff
 
 
-class IsOwner(permissions.BasePermission):
+class IsProjectOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return request.user == obj.user
+    
+
+class IsTableOwner(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.project.user
