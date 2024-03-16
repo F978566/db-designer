@@ -21,7 +21,12 @@ from .models import (
     Relationship,
     RelationshipType,
 )
-from .permissions import IsAdminOrReadOnly, IsProjectOwner, IsTableOwner
+from .permissions import (
+    IsAdminOrReadOnly,
+    IsProjectOwner,
+    IsTableOwner,
+    IsColumnOwner,
+)
 
 
 class Logout(APIView):
@@ -61,12 +66,6 @@ class TableViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Table.objects.filter(project__user=self.request.user)
-
-    def create(self, request, *args, **kwargs):
-        if get_object_or_404(Project, pk=request.data['project']).user.pk != request.user.pk:
-            return Response({'detail': 'This project seems to be linked to another user'}, status=status.HTTP_400_BAD_REQUEST)
-
-        return super().create(request, *args, **kwargs)
     
     @action(methods=['get'], url_path='all-project-tables-except-one/(?P<project>\w+)/(?P<table>\w+)', detail=False)
     def excludeOneTable(self, request, *args, **kwargs):
@@ -77,18 +76,12 @@ class TableViewSet(viewsets.ModelViewSet):
 class ColumnViewSet(viewsets.ModelViewSet):
     queryset = Column.objects.all()
     serializer_class = ColumnSerializer
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticated, IsColumnOwner, ]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['table__name']
     
     def get_queryset(self):
         return Column.objects.filter(table__project__user=self.request.user)
-    
-    def create(self, request, *args, **kwargs):
-        if get_object_or_404(Table, pk=request.data['table']).project.user.pk!= request.user.pk:
-            return Response({'detail': 'This table seems to be linked to another user'}, status=status.HTTP_400_BAD_REQUEST)
-            
-        return super().create(request, *args, **kwargs)
 
     @action(methods=['get'], url_path='project-columns/(?P<table>\w+)/(?P<project>\w+)', detail=False)
     def projectColumns(self, request, *args, **kwargs):
@@ -117,15 +110,8 @@ class RelationshipViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['project__name']
     
-    def create(self, request, *args, **kwargs):
-        if get_object_or_404(Project, pk=request.data['project']).user.pk != request.user.pk:
-            return Response({'detail': 'This project seems to be linked to another user'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return super().create(request, *args, **kwargs)
-    
     def get_queryset(self):
-        queryset = Relationship.objects.filter(project__user=self.request.user)
-        return queryset
+        return Relationship.objects.filter(project__user=self.request.user)
 
 
 class RelationshipTypeViewSet(viewsets.ModelViewSet):
