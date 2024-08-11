@@ -1,0 +1,18 @@
+.inputStyle {
+    width: 100%;
+    height: 3rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: opacity 0.5s 0.5s ease;
+}
+
+.inputStyle:focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.inputStyle:focus::placeholder {
+    transition: 0.3s ease;
+    opacity: 0;
+}

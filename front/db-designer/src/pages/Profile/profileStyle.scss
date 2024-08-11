@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20vh;
+    height: 100vh;
+}
+
+.profile {
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgb(233, 233, 233);
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    height: 30vh;
+    border-radius: 10px;    
+}
+
+.mainInfo {
+    display: flex;
+    gap: 6px;
+    font-size: 1.2rem;
+}
+
+.info {
+    display: flex;
+    gap: 6px;
+}
+
+.userEmail {
+    font-size: 1.2rem;
+}
+
+.email {
+    font-size: 1rem;
+    color: rgb(105, 105, 105);
+}
+
+.minorInfo {
+    color: rgb(105, 105, 105);
+}

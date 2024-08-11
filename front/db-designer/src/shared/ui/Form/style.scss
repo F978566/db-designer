@@ -1,0 +1,17 @@
+.formStyle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35vw;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.formTitle {
+    margin-bottom: 5%;
+    font-family: "Rubik", sans-serif;
+    font-size: 1.5rem;
+}

@@ -1,0 +1,13 @@
+.sidebar__link {
+    list-style: none;
+    background-color: rgb(252, 250, 250);
+    border-radius: 100vh;
+    width: 4vh;
+    height: 4vh;
+    transition: transform .2s;
+}
+
+.sidebar__link:hover {
+    background-color: var(--background-color-hover);
+    transform: scale(1.1);
+}
