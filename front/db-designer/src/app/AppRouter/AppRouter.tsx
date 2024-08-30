@@ -9,6 +9,8 @@ import {
     TestPage,
     Login,
     Profile,
+    SignUpPage,
+    Activate,
 } from "@/pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -21,6 +23,8 @@ export const router = createBrowserRouter(
                 <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/activate/:uid/:token" element={<Activate />} />
         </Route>
     )
 )

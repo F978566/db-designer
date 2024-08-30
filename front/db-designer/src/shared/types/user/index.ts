@@ -1,5 +1,7 @@
-export type { User } from './user';
+export type { IUserRepository } from "./IUserRepository";
+export type { User } from "./user";
 export type {
     ObtainToken,
     PostToken,
-} from './token';
+} from "./token";
+export type { UserActivate } from "./activate";

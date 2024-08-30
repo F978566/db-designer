@@ -1,1 +1,0 @@
-export { fetchProjects } from "./project";

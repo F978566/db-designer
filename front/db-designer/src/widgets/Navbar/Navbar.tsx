@@ -4,11 +4,9 @@ import { user } from "@/entities";
 import { LiButton } from "@/shared/ui";
 import {
     ProjectSVG,
-    LoginSVG,
-    ProfileSVG,
     HomeSVG,
-    LogoutSVG,
 } from "@/shared/ui";
+import { AuthorizedButtonSet, UnauthorizedButtonSet } from "./UserButtonSet";
 import "./navbar.scss";
 
 
@@ -27,14 +25,9 @@ export const Navbar = observer(() => {
                         user?.isAuth
                             ?
                             <>
-                                <LiButton to="profile/">
-                                    <ProfileSVG />
-                                </LiButton>
-                                <LiButton to="logout/">
-                                    <LogoutSVG />
-                                </LiButton>
+                                <AuthorizedButtonSet />
                             </>
-                            : <LiButton to="login/"><LoginSVG /></LiButton>
+                            : <UnauthorizedButtonSet />
                     }
                 </div>
             </div>

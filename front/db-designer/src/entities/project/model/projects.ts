@@ -1,21 +1,24 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import { container, injectable, inject } from "tsyringe";
 
-import { Project } from "@/shared/types";
-import { fetchProjects } from "@/shared/api";
+import type { IBaseRepository, Project } from "@/shared/types";
 
 
-class Projects {
+@injectable()
+export class Projects {
     projects: Project[] = [];
+    private projectRepository: IBaseRepository<Project>;
 
-    constructor() {
+    constructor(@inject("IProjectRepository") projectRepository: IBaseRepository<Project>) {
+        this.projectRepository = projectRepository;
         makeAutoObservable(this);
     }
 
     getProjects() {
         runInAction(async () => {
             try {
-                const res = await fetchProjects();
-                this.setProjects(res.data);
+                const res = await this.projectRepository.getAll();
+                this.setProjects(res);
             } catch (err) {
                 console.log(err);
             }
@@ -27,5 +30,4 @@ class Projects {
     }
 }
 
-
-export const project = new Projects();
+export const project = container.resolve(Projects);

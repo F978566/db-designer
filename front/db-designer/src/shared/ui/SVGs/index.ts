@@ -4,4 +4,7 @@ export {
     ProjectSVG,
     ProfileSVG,
     HomeSVG,
+    ErrorSvg,
+    DeleteSvg,
+    MenuSvg,
  } from './SVGs.tsx'

@@ -11,7 +11,7 @@ interface LiButtonProps extends LinkProps {
 export const LiButton = ({ children, ...props }: LiButtonProps) => {
     return (
         <li className="sidebar__link">
-            <Link to={props.to}>
+            <Link to={props?.to}>
                 { children }
             </Link>
         </li>

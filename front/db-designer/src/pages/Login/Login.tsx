@@ -1,6 +1,6 @@
 import { LoginForm } from "@/features";
 import { user } from "@/entities";
-import "./login-style.scss";
+import "./style.scss";
 
 
 export const Login = () => {

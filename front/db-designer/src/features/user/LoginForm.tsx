@@ -5,6 +5,8 @@ import { Navigate } from "react-router-dom";
 import { PostToken } from "@/shared/types";
 import { User } from "@/entities";
 import { Input, Form, Button, LoadBar } from "@/shared/ui";
+import { UserStatus } from "@/entities/user";
+import { ErrorList } from "@/shared/ui";
 
 
 export const LoginForm= observer(({user}: {user: User}) => {
@@ -14,7 +16,7 @@ export const LoginForm= observer(({user}: {user: User}) => {
         user.userLogin(data);
     }
     
-    if (user.isLoading) {
+    if (user.status === UserStatus.LOADING) {
         return <LoadBar />;
     }
 
@@ -27,7 +29,7 @@ export const LoginForm= observer(({user}: {user: User}) => {
                 <Input
                     {...register("email", { required: true })}
                     placeholder="Email"
-                    type="text" 
+                    type="email"
                 />
                 <Input
                     {...register("password",
@@ -36,6 +38,8 @@ export const LoginForm= observer(({user}: {user: User}) => {
                     type="password"
                 />
                 <Button type="submit">Login</Button>
+                <a href="/sign-up">Sign-up</a>
+                {user.status === UserStatus.ERROR && <ErrorList errors={user.errors}/>}
                 {user.isAuth && <Navigate to={'/'}/>}
             </Form>
         </>

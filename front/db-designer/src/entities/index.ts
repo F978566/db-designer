@@ -2,4 +2,4 @@ export {
     ProjectCard,
     project,
 } from "./project";
-export { User, user } from "./user";
+export { UserStatus, User, user, UserCard } from "./user";
