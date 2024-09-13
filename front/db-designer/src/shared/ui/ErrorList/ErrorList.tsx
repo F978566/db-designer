@@ -4,7 +4,6 @@ import "./style.scss";
 
 
 export const ErrorList = ({ errors }: { errors: string[] }) => {
-    console.log(errors)
     return (
         <div className="error-list">
             {

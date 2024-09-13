@@ -89,4 +89,20 @@ export class UserService {
 
         return res;
     }
+
+    async resetPassword(email: string): AxiosPromise<{email: string}> {
+        const res = await axiosInstance.post("/auth/users/reset_password",
+            {
+                email: email
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `JWT ${localStorage.getItem("accessToken")}`
+                }
+            }
+        );
+        
+        return res;
+    }
 }

@@ -1,2 +1,6 @@
-export { RegisterForm } from "./RegisterForm";
-export { LoginForm } from "./LoginForm.tsx";
+export {
+    RegisterForm,
+    LoginForm,
+    DeleteUserForm,
+} from "./Forms";
+export { UserFeaturesList } from "./UserFeaturesList";

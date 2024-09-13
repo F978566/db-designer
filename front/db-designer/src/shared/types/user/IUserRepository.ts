@@ -9,4 +9,5 @@ export interface IUserRepository {
     register(user: User): Promise<User>;
     activate(activateData: UserActivate): Promise<UserActivate>;
     delete(password: string): Promise<string>;
+    resetPassword(password: string): Promise<{email: string}>;
 }

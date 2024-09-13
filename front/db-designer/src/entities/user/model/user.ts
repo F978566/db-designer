@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction, action } from "mobx";
 import { container, inject, injectable } from "tsyringe";
 
 import type { User as UserType, UserActivate, PostToken, IUserRepository, ObtainToken } from "@/shared/types";
@@ -90,7 +90,7 @@ export class User {
         runInAction(async () => {
             try {
                 this.setUserStatus(UserStatus.LOADING);
-                const res: UserType = await this.userRepository.register(newUser);
+                await this.userRepository.register(newUser);
                 this.setUserStatus(UserStatus.FULFILLED);
             } catch (err: any) {
                 let errors: string[] = [];

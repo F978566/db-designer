@@ -11,6 +11,7 @@ import {
     Profile,
     SignUpPage,
     Activate,
+    DeleteUser,
 } from "@/pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -21,6 +22,7 @@ export const router = createBrowserRouter(
             <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<TestPage />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/delete-profile" element={<DeleteUser />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUpPage />} />

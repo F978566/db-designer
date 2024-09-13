@@ -5,12 +5,11 @@
     list-style: none;
     background-color: rgb(252, 250, 250);
     border-radius: 100vh;
-    width: 5vmin;
-    height: 5vmin;
+    width: 5vh;
+    height: 5vh;
     transition: transform .2s;
 }
 
 .sidebar__link:hover {
     background-color: var(--background-color-hover);
-    transform: scale(1.1);
 }

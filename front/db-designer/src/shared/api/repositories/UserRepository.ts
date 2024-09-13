@@ -30,4 +30,8 @@ export class UserRepository implements IUserRepository {
     async delete(password: string): Promise<string> {
         return (await this.userService.delete(password)).data;
     }
+
+    async resetPassword(email: string): Promise<{email: string}> {
+        return (await this.userService.resetPassword(email)).data;
+    }
 }
