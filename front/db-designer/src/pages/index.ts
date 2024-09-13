@@ -1,3 +1,4 @@
+export { ResetPassword } from "./ResetPassword/ResetPassword";
 export { SignUpPage } from "./SignUpPage";
 export { Layout } from "@/pages/Layout";
 export { Profile } from "./Profile/Profile";

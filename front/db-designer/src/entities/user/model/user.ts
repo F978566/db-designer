@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction, action } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { container, inject, injectable } from "tsyringe";
 
 import type { User as UserType, UserActivate, PostToken, IUserRepository, ObtainToken } from "@/shared/types";
@@ -126,6 +126,19 @@ export class User {
                 this.setUserStatus(UserStatus.FULFILLED);
             } catch (err: any) {
                 this.setErrors(["Error deleting"]);
+                this.setUserStatus(UserStatus.ERROR);
+            }
+        })
+    }
+
+    resetPassword(email: string) {
+        runInAction(async () => {
+            try {
+                this.setUserStatus(UserStatus.LOADING);
+                await this.userRepository.resetPassword(email);
+                this.setUserStatus(UserStatus.FULFILLED);
+            } catch (err: any) {
+                this.setErrors(["Error reset password"]);
                 this.setUserStatus(UserStatus.ERROR);
             }
         })

@@ -7,4 +7,5 @@ export {
     ErrorSvg,
     DeleteSvg,
     MenuSvg,
+    ResetPasswordSvg,
  } from './SVGs.tsx'
