@@ -2,6 +2,6 @@ export {
     RegisterForm,
     LoginForm,
     DeleteUserForm,
-    ResetPasswordForm,
+    ResetPasswordConfirmForm,
 } from "./Forms";
 export { UserFeaturesList } from "./UserFeaturesList";

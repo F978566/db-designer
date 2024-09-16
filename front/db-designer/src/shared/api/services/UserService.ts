@@ -1,11 +1,18 @@
 import { AxiosPromise } from "axios";
+
 import { axiosInstance } from "../base";
-import { ObtainToken, PostToken, User, UserActivate } from "@/shared/types";
+import {
+    ObtainToken,
+    PostToken,
+    User,
+    UserActivate,
+    ResetPassword,
+} from "@/shared/types";
 import axios from "axios";
 
-export class UserService {
+export class    UserService {
     async login(data: PostToken): AxiosPromise<ObtainToken> {
-        return await axiosInstance.post("/auth/jwt/create", data);
+        return await axiosInstance.post("/auth/jwt/create/", data);
     }
     
     async verifyAuthentication(): Promise<number> {
@@ -91,7 +98,7 @@ export class UserService {
     }
 
     async resetPassword(email: string): AxiosPromise<{email: string}> {
-        const res = await axiosInstance.post("/auth/users/reset_password",
+        const res = await axiosInstance.post("/auth/users/reset_password/",
             {
                 email: email
             },
@@ -99,6 +106,20 @@ export class UserService {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `JWT ${localStorage.getItem("accessToken")}`
+                }
+            }
+        );
+        
+        return res;
+    }
+
+    async resetPasswordConfirm(data: ResetPassword) {
+        const res = await axiosInstance.post("/auth/users/reset_password_confirm/",
+            data,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `JWT ${localStorage.getItem("accessToken")}`,
                 }
             }
         );

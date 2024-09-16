@@ -9,7 +9,7 @@ export const Profile = () => {
         <div className="wrapper">
             <div className="profile-wrapper">
                 <UserCard user={user} />
-                <UserFeaturesList />
+                <UserFeaturesList user={user} />
             </div>
         </div>
     )

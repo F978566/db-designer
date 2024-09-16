@@ -1,3 +1,4 @@
+export type { ResetPassword } from "./resetPassword";
 export type { IUserRepository } from "./IUserRepository";
 export type { User } from "./user";
 export type {

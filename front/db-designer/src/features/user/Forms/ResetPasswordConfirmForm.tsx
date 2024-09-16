@@ -6,12 +6,12 @@ import { Button, Form, Input, LoadBar } from "@/shared/ui";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-export const ResetPasswordForm = observer(({ user }: { user: User }) => {
-    const { register, handleSubmit } = useForm<{ email: string }>();
+export const ResetPasswordConfirmForm = observer(({ user, uid, token }: { user: User, uid: string, token: string }) => {
+    const { register, handleSubmit } = useForm<{ new_password: string }>();
     const [ submited, setSubmited ] = useState(false);
 
-    const handleSub = (data: { email: string }) => {
-        user.resetPassword(data.email);
+    const handleSub = (data: { new_password: string }) => {
+        user.resetPasswordConfirm({ ...data, uid, token });
         if (user.status === UserStatus.FULFILLED) {
             setSubmited(true);
         }
@@ -25,7 +25,7 @@ export const ResetPasswordForm = observer(({ user }: { user: User }) => {
 
     return (
         <Form onSubmit={handleSubmit(handleSub)}>
-            <Input type="email" {...register("email", { required: true })}/>
+            <Input type="password" placeholder="New Password" {...register("new_password", { required: true })}/>
             <Button type="submit">Reset Password</Button>
         </Form>
     )

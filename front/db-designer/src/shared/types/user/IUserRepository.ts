@@ -10,4 +10,5 @@ export interface IUserRepository {
     activate(activateData: UserActivate): Promise<UserActivate>;
     delete(password: string): Promise<string>;
     resetPassword(password: string): Promise<{email: string}>;
+    resetPasswordConfirm(data: { uid: string, token: string, new_password: string }): Promise<{ uid: string, token: string, new_password: string }>;
 }

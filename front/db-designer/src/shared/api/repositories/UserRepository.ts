@@ -1,6 +1,13 @@
 import { inject, injectable } from "tsyringe";
+
 import { UserService } from "../services";
-import { IUserRepository, ObtainToken, PostToken, User, UserActivate } from "@/shared/types";
+import {
+    IUserRepository,
+    ObtainToken,
+    PostToken,
+    User,
+    UserActivate,
+} from "@/shared/types";
 
 
 @injectable()
@@ -33,5 +40,9 @@ export class UserRepository implements IUserRepository {
 
     async resetPassword(email: string): Promise<{email: string}> {
         return (await this.userService.resetPassword(email)).data;
+    }
+
+    async resetPasswordConfirm(data: { uid: string; token: string; new_password: string; }): Promise<{ uid: string; token: string; new_password: string; }> {
+        return (await this.userService.resetPasswordConfirm(data)).data;
     }
 }
