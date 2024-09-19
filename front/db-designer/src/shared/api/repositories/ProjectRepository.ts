@@ -1,6 +1,6 @@
 import { injectable, inject, container } from "tsyringe";
 
-import { ProjectService } from "../services";
+import { ProjectService } from "../services/ProjectService";
 import { Project, IProjectRepository } from "@/shared/types";
 
 

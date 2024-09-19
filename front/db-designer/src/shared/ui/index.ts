@@ -1,13 +1,12 @@
-export { LiButtonsHorizontalList } from "./LiButtonsHorizontalList";
-export { Error } from "./Error";
-export { LoadBar } from "./LoadBar";
-export { LiButton } from "./LiButton";
-export * from "./SVGs";
-export { Input } from "./Input";
-export { Form } from "./Form";
-export { Button } from "./Button";
-export { Info } from "./Info";
-export { ErrorList } from "./ErrorList";
+export { LiButtonsHorizontalList } from "./LiButtonsHorizontalList/LiButtonsHorizontalList";
+export { Error } from "./Error/Error";
+export { LoadBar } from "./LoadBar/LoadBar";
+export { LiButton } from "./LiButton/LiButtont";
+export { Input } from "./Input/Input";
+export { Form } from "./Form/Form";
+export { Button } from "./Button/Button";
+export { Info } from "./Info/Info";
+export { ErrorList } from "./ErrorList/ErrorList";
 export {
     LoginSVG,
     LogoutSVG,
@@ -18,4 +17,4 @@ export {
     DeleteSvg,
     MenuSvg,
     ResetPasswordSvg,
-} from "./SVGs";
+} from "./SVGs/SVGs";

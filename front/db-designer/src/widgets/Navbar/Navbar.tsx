@@ -6,7 +6,8 @@ import {
     ProjectSVG,
     HomeSVG,
 } from "@/shared/ui";
-import { AuthorizedButtonSet, UnauthorizedButtonSet } from "./UserButtonSet";
+import { AuthorizedButtonSet } from "./UserButtonSet/AuthorizedButtonSet";
+import { UnauthorizedButtonSet } from "./UserButtonSet/UnauthorizedButtonSet";
 import "./navbar.scss";
 
 
@@ -18,7 +19,7 @@ export const Navbar = observer(() => {
                     <LiButton to="/">
                         <HomeSVG />
                     </LiButton>
-                    <LiButton to="#">
+                    <LiButton to="/projects">
                         <ProjectSVG />
                     </LiButton>
                     {

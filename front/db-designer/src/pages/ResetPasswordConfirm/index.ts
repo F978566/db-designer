@@ -1,1 +1,0 @@
-export { ResetPasswordConfirm } from "./ResetPasswordConfirm";

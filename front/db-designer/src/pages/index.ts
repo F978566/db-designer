@@ -1,8 +1,9 @@
-export { ResetPasswordConfirm } from "./ResetPasswordConfirm";
-export { SignUpPage } from "./SignUpPage";
-export { Layout } from "@/pages/Layout";
+export { Projects } from "./Projects/Projects";
+export { ResetPasswordConfirm } from "./ResetPasswordConfirm/ResetPasswordConfirm";
+export { SignUpPage } from "./SignUpPage/SignUpPage";
+export { Layout } from "@/pages/Layout/Layout";
 export { Profile } from "./Profile/Profile";
 export { TestPage } from "@/pages/TestPage/TetsPage";
 export { Login } from "./Login/Login";
-export { Activate } from "./Activate";
-export { DeleteUser } from "./DeleteUser";
+export { Activate } from "./Activate/Activate";
+export { DeleteUser } from "./DeleteUser/DeleteUser";

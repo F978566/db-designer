@@ -1,1 +1,0 @@
-export { Activate } from "./Activate";

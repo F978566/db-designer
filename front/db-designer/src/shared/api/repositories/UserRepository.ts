@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { UserService } from "../services";
+import { UserService } from "../services/UserService";
 import {
     IUserRepository,
     ObtainToken,
