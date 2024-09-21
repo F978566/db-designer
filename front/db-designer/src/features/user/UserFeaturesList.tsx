@@ -15,7 +15,7 @@ export const UserFeaturesList = observer(({ user }: { user: User }) => {
             <LiButton to="/delete-profile">
                 <DeleteSvg />
             </LiButton>
-            <LiButton to="#" onClick={() => user.resetPassword()}>
+            <LiButton to="/" onClick={() => user.resetPassword()}>
                 <ResetPasswordSvg />
             </LiButton>
         </LiButtonsHorizontalList>

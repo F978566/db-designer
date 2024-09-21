@@ -8,15 +8,14 @@ import { Input, Form, Button, LoadBar } from "@/shared/ui";
 import { UserStatus } from "@/entities/user";
 import { ErrorList } from "@/shared/ui";
 
-
-export const LoginForm= observer(({user}: {user: User}) => {
+export const LoginForm = observer(({ user }: { user: User }) => {
     const { register, handleSubmit } = useForm<PostToken>();
 
-    const handleSub = (data: PostToken) => {
-        user.userLogin(data);
+    const handleSub = async (data: PostToken) => {
+        await user.userLogin(data);
     }
-    
-    if (user.status === UserStatus.LOADING) {
+
+    if (user.userStatus === UserStatus.LOADING) {
         return <LoadBar />;
     }
 
@@ -33,14 +32,14 @@ export const LoginForm= observer(({user}: {user: User}) => {
                 />
                 <Input
                     {...register("password",
-                    { required: true })}
+                        { required: true })}
                     placeholder="Password"
                     type="password"
                 />
                 <Button type="submit">Login</Button>
                 <a href="/sign-up">Sign-up</a>
-                {user.status === UserStatus.ERROR && <ErrorList errors={user.errors}/>}
-                {user.isAuth && <Navigate to={'/'}/>}
+                {user.userStatus === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+                {user.isAuth && <Navigate to="/" />}
             </Form>
         </>
     )

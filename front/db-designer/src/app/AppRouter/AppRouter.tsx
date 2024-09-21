@@ -25,7 +25,7 @@ export const router = createBrowserRouter(
                 <Route path="/" element={<TestPage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/delete-profile" element={<DeleteUser />} />
-                <Route path="/reset-password-confirm/:uid/:token" element={<ResetPasswordConfirm />} />
+                <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm />} />
                 <Route path="/projects" element={<Projects />} />
             </Route>
             <Route path="/login" element={<Login />} />

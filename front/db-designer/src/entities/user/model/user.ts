@@ -22,7 +22,7 @@ export class User {
         access: localStorage.getItem("accessToken"),
         refresh: localStorage.getItem("refreshToken"),
     };
-    status: UserStatus = UserStatus.NOTHING;
+    userStatus: UserStatus = UserStatus.NOTHING;
     isAuth: boolean = false;
     errors: string[] = [];
 
@@ -30,53 +30,65 @@ export class User {
         makeAutoObservable(this);
     }
 
-    userLogin(userData: PostToken) {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                const res: ObtainToken = await this.userRepository.login(userData);
+    async userLogin(userData: PostToken) {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            const res: ObtainToken = await this.userRepository.login(userData);
+            runInAction(() => {
                 localStorage.setItem("accessToken", res.access);
                 localStorage.setItem("refreshToken", res.refresh);
                 this.loadUser();
                 this.setIsAuth(true);
                 this.setUserStatus(UserStatus.FULFILLED)
-            } catch (err: any) {
+            })
+        } catch (err: any) {
+            runInAction(() => {
                 this.setErrors([err?.response?.data.detail]);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    checkAuth() {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                const res: number = await this.userRepository.verifyAuth();
+    async checkAuth() {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            const res: number = await this.userRepository.verifyAuth();
 
-                switch (res) {
-                    case 200:
-                        this.loadUser();
+            switch (res) {
+                case 200:
+                    await this.loadUser();
+                    runInAction(() => {
                         this.setIsAuth(true);
-                        break;
-                    case 401:
+                    })
+                    break;
+                case 401:
+                    runInAction(() => {
                         this.setIsAuth(false);
                         localStorage.removeItem("accessToken");
                         localStorage.removeItem("refreshToken");
-                        break;
-                    default:
-                        throw new Error("Unexpected status code");
-                }
+                    })
+                    break;
+                default:
+                    throw new Error("Unexpected status code");
+            }
+            runInAction(() => {
                 this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err: any) {
+            })
+        } catch (err: any) {
+            runInAction(() => {
                 this.setErrors(err?.response?.data.detail);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    loadUser() {
-        runInAction(async () => {
-            const res = await this.userRepository.loadData();
+    async loadUser() {
+        const res = await this.userRepository.loadData();
+        runInAction(() => {
             this.setUser({
                 ...res,
                 refresh: localStorage.getItem("refreshToken"),
@@ -93,13 +105,17 @@ export class User {
         this.setIsAuth(false);
     }
 
-    registerUser(newUser: UserType) {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                await this.userRepository.register(newUser);
-                this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err: any) {
+    async registerUser(newUser: UserType) {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            await this.userRepository.register(newUser);
+            runInAction(() =>
+                this.setUserStatus(UserStatus.FULFILLED)
+            );
+        } catch (err: any) {
+            runInAction(() => {
                 let errors: string[] = [];
                 const r = err?.response?.data;
 
@@ -108,60 +124,76 @@ export class User {
                 }
                 this.setErrors(errors);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    userActivate(data: UserActivate) {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                this.userRepository.activate(data);
+    async userActivate(data: UserActivate) {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            await this.userRepository.activate(data);
+            runInAction(() => {
                 this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err) {
+            })
+        } catch (err) {
+            runInAction(() => {
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    delete(password: string) {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                await this.userRepository.delete(password);
+    async delete(password: string) {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            await this.userRepository.delete(password);
+            runInAction(() => {
                 this.logout();
                 this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err: any) {
+            })
+        } catch (err: any) {
+            runInAction(() => {
                 this.setErrors(["Error deleting"]);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    resetPassword() {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                await this.userRepository.resetPassword(this.user.email);
+    async resetPassword() {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            await this.userRepository.resetPassword(this.user.email);
+            runInAction(() => {
                 this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err: any) {
+            })
+        } catch (err: any) {
+            runInAction(() => {
                 this.setErrors(["Error reset password"]);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
-    resetPasswordConfirm(data: ResetPassword) {
-        runInAction(async () => {
-            try {
-                this.setUserStatus(UserStatus.LOADING);
-                await this.userRepository.resetPasswordConfirm(data);
+    async resetPasswordConfirm(data: ResetPassword) {
+        runInAction(() => {
+            this.setUserStatus(UserStatus.LOADING);
+        })
+        try {
+            await this.userRepository.resetPasswordConfirm(data);
+            runInAction(() => {
                 this.setUserStatus(UserStatus.FULFILLED);
-            } catch (err: any) {
+            })
+        } catch (err: any) {
+            runInAction(() => {
                 this.setErrors(["Error reset password"]);
                 this.setUserStatus(UserStatus.ERROR);
-            }
-        })
+            })
+        }
     }
 
     setIsAuth(status: boolean) {
@@ -169,7 +201,7 @@ export class User {
     }
 
     setUserStatus(status: UserStatus) {
-        this.status = status;
+        this.userStatus = status;
     }
 
     setUser(userData: UserType) {

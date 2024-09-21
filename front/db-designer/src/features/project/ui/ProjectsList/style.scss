@@ -11,4 +11,10 @@
     width: 80%;
     padding: 40px;
     border-radius: 10px;
+    overflow-y: auto;
+    box-shadow: -10px 10px 10px rgba(80, 80, 80, 0.2);
+}
+
+.project-list-container > div {
+    margin-bottom: 20px;
 }

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { User, UserStatus } from "@/entities";
 import { Form, Input, Button, LoadBar } from "@/shared/ui";
@@ -8,15 +8,17 @@ import { Form, Input, Button, LoadBar } from "@/shared/ui";
 
 export const DeleteUserForm = observer(({ user }: { user: User }) => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
-    const handleSub = (data: any) => {
-        user.delete(data.password)
+    const handleSub = async (data: any) => {
+        await user.delete(data.password)
+
+        if (user.userStatus === UserStatus.FULFILLED)
+            navigate("/login");
     }
 
-    if (user.status === UserStatus.LOADING) {
+    if (user.userStatus === UserStatus.LOADING) {
         return <LoadBar />;
-    } else if (!localStorage.getItem("accessToken")) {
-        return <Navigate to="/login" />;
     }
 
     return (

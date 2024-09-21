@@ -2,4 +2,9 @@
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
+    transition: ease .3s;
+}
+
+.project-card-wrapper:hover {
+    transform: scale(1.05);
 }
