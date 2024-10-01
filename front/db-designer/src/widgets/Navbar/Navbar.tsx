@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import { user } from "@/entities";
+import { user, UserStatus } from "@/entities";
 import { LiButton } from "@/shared/ui";
 import {
     ProjectSVG,
@@ -23,7 +23,7 @@ export const Navbar = observer(() => {
                         <ProjectSVG />
                     </LiButton>
                     {
-                        user?.isAuth
+                        user?.status === UserStatus.LOGIN
                             ?
                             <>
                                 <AuthorizedButtonSet />

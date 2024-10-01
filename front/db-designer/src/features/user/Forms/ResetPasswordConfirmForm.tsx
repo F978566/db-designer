@@ -12,14 +12,12 @@ export const ResetPasswordConfirmForm = observer(({ user, uid, token }: { user: 
 
     const handleSub = async (data: { new_password: string }) => {
         await user.resetPasswordConfirm({ ...data, uid, token });
-
-        if (user.userStatus === UserStatus.FULFILLED) {
-            navigate("/login");
-        }
     }
 
-    if (user.userStatus === UserStatus.LOADING) {
+    if (user.status === UserStatus.LOADING) {
         return <LoadBar />;
+    } else if (user.status === UserStatus.RESETPASSWORDCONFIRM) {
+        navigate("/login");
     }
 
     return (

@@ -15,7 +15,7 @@ export const LoginForm = observer(({ user }: { user: User }) => {
         await user.userLogin(data);
     }
 
-    if (user.userStatus === UserStatus.LOADING) {
+    if (user.status === UserStatus.LOADING) {
         return <LoadBar />;
     }
 
@@ -38,8 +38,8 @@ export const LoginForm = observer(({ user }: { user: User }) => {
                 />
                 <Button type="submit">Login</Button>
                 <a href="/sign-up">Sign-up</a>
-                {user.userStatus === UserStatus.ERROR && <ErrorList errors={user.errors} />}
-                {user.isAuth && <Navigate to="/" />}
+                {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+                {user.status === UserStatus.LOGIN && <Navigate to="/" />}
             </Form>
         </>
     )

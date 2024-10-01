@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { User, UserStatus } from "@/entities";
 import { Form, Input, Button, LoadBar } from "@/shared/ui";
@@ -12,14 +12,12 @@ export const DeleteUserForm = observer(({ user }: { user: User }) => {
 
     const handleSub = async (data: any) => {
         await user.delete(data.password)
-
-        if (user.userStatus === UserStatus.FULFILLED)
-            navigate("/login");
     }
 
-    if (user.userStatus === UserStatus.LOADING) {
+    if (user.status === UserStatus.LOADING) {
         return <LoadBar />;
-    }
+    } else if (user.status === UserStatus.DELETE)
+        navigate("/login");
 
     return (
         <Form onSubmit={handleSubmit(handleSub)}>

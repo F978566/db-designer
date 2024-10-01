@@ -7,7 +7,7 @@ import "./style.scss";
 
 export const ProjectsList =  observer(({ projects }: { projects: Projects }) => {
     useEffect(() => {
-        projects.getProjects();
+        projects.getAll();
     }, [projects])
 
     return (

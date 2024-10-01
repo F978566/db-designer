@@ -15,14 +15,13 @@ export const RegisterForm = observer(({ user }: { user: User }) => {
     const handleSub = async (data: UserType) => {
         if (data.password === data.re_password) {
             await user.registerUser(data);
-            if (user.userStatus === UserStatus.FULFILLED) {
-                navigate("/login");
-            }
         }
     }
 
-    if (user.userStatus === UserStatus.LOADING) {
+    if (user.status === UserStatus.LOADING) {
         return <LoadBar />;
+    } else if (user.status === UserStatus.SIGNUP) {
+        navigate("/login");
     }
 
     return (
@@ -32,7 +31,7 @@ export const RegisterForm = observer(({ user }: { user: User }) => {
             <Input placeholder="Surname" {...register("last_name", { required: true })} />
             <Input placeholder="Password" type="password" {...register("password", { required: true })} />
             <Input placeholder="Password once again" type="password" {...register("re_password", { required: true })} />
-            {user.userStatus === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+            {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
             <Button type="submit">Sign-up</Button>
         </Form>
     )

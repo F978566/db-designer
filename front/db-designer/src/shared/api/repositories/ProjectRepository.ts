@@ -9,10 +9,12 @@ export class ProjectRepository implements IProjectRepository {
     constructor(@inject(ProjectService) private projectService: ProjectService) {}
     
     async getAll() {
-        return (await this.projectService.fetchProjects()).data;
+        return (await this.projectService.fetchAll()).data;
     }
     
-    async create(data: Project) {}
+    async create(data: Project) {
+        return (await this.projectService.create(data)).data;
+    }
     
     async update(id: number, data: Project) {}
     

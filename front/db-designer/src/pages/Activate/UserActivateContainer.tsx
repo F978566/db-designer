@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Button, ErrorList, LoadBar } from "@/shared/ui";
 import { UserActivate } from "@/shared/types";
@@ -15,23 +15,22 @@ export const UserActivateContainer = observer(({ uid, token, user }: UserActivat
 
     const handleSub = async ({ uid, token }: UserActivate) => {
         await user.userActivate({ uid, token })
-        if (user.userStatus === UserStatus.FULFILLED) {
-            navigate("/");
-        }
     }
 
-    if (user.userStatus === UserStatus.LOADING) {
+    if (user.status === UserStatus.LOADING) {
         return (
             <div className="container">
                 <LoadBar />
             </div>
         )
+    } else if (user.status === UserStatus.ACTIVATE) {
+        navigate("/");
     }
 
     return (
         <div className="container">
             <Button onClick={() => handleSub({ uid, token })}>Activate</Button>
-            {user.userStatus === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+            {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
         </div>
     )
 })

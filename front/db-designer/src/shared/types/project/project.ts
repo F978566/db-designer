@@ -3,5 +3,5 @@ export type Project = {
     name: string;
     description: string;
     created_at?: string;
-    user: number;
+    user?: number;
 }

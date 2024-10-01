@@ -22,8 +22,7 @@ export class User {
         access: localStorage.getItem("accessToken"),
         refresh: localStorage.getItem("refreshToken"),
     };
-    userStatus: UserStatus = UserStatus.NOTHING;
-    isAuth: boolean = false;
+    status: UserStatus = UserStatus.NOTHING;
     errors: string[] = [];
 
     constructor(@inject("IUserRepository") private userRepository: IUserRepository) {
@@ -40,8 +39,7 @@ export class User {
                 localStorage.setItem("accessToken", res.access);
                 localStorage.setItem("refreshToken", res.refresh);
                 this.loadUser();
-                this.setIsAuth(true);
-                this.setUserStatus(UserStatus.FULFILLED)
+                this.setUserStatus(UserStatus.LOGIN);
             })
         } catch (err: any) {
             runInAction(() => {
@@ -62,22 +60,19 @@ export class User {
                 case 200:
                     await this.loadUser();
                     runInAction(() => {
-                        this.setIsAuth(true);
+                        this.setUserStatus(UserStatus.LOGIN);
                     })
                     break;
                 case 401:
                     runInAction(() => {
-                        this.setIsAuth(false);
                         localStorage.removeItem("accessToken");
                         localStorage.removeItem("refreshToken");
+                        this.setUserStatus(UserStatus.LOGOUT);
                     })
                     break;
                 default:
                     throw new Error("Unexpected status code");
             }
-            runInAction(() => {
-                this.setUserStatus(UserStatus.FULFILLED);
-            })
         } catch (err: any) {
             runInAction(() => {
                 this.setErrors(err?.response?.data.detail);
@@ -102,7 +97,7 @@ export class User {
     logout() {
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("accessToken");
-        this.setIsAuth(false);
+        this.status = UserStatus.LOGOUT;
     }
 
     async registerUser(newUser: UserType) {
@@ -112,7 +107,7 @@ export class User {
         try {
             await this.userRepository.register(newUser);
             runInAction(() =>
-                this.setUserStatus(UserStatus.FULFILLED)
+                this.setUserStatus(UserStatus.SIGNUP)
             );
         } catch (err: any) {
             runInAction(() => {
@@ -135,7 +130,7 @@ export class User {
         try {
             await this.userRepository.activate(data);
             runInAction(() => {
-                this.setUserStatus(UserStatus.FULFILLED);
+                this.setUserStatus(UserStatus.ACTIVATE);
             })
         } catch (err) {
             runInAction(() => {
@@ -152,7 +147,7 @@ export class User {
             await this.userRepository.delete(password);
             runInAction(() => {
                 this.logout();
-                this.setUserStatus(UserStatus.FULFILLED);
+                this.setUserStatus(UserStatus.DELETE);
             })
         } catch (err: any) {
             runInAction(() => {
@@ -169,7 +164,7 @@ export class User {
         try {
             await this.userRepository.resetPassword(this.user.email);
             runInAction(() => {
-                this.setUserStatus(UserStatus.FULFILLED);
+                this.setUserStatus(UserStatus.RESETPASSWORD);
             })
         } catch (err: any) {
             runInAction(() => {
@@ -186,7 +181,7 @@ export class User {
         try {
             await this.userRepository.resetPasswordConfirm(data);
             runInAction(() => {
-                this.setUserStatus(UserStatus.FULFILLED);
+                this.setUserStatus(UserStatus.RESETPASSWORDCONFIRM);
             })
         } catch (err: any) {
             runInAction(() => {
@@ -196,12 +191,8 @@ export class User {
         }
     }
 
-    setIsAuth(status: boolean) {
-        this.isAuth = status;
-    }
-
     setUserStatus(status: UserStatus) {
-        this.userStatus = status;
+        this.status = status;
     }
 
     setUser(userData: UserType) {

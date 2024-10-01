@@ -11,7 +11,7 @@ export interface IProjectService {
 
 @injectable()
 export class ProjectService {
-    async fetchProjects(): AxiosPromise<Project[]> {
+    async fetchAll(): AxiosPromise<Project[]> {
         const res = await axiosInstance.get<Project[]>("projects/", 
             {
                 headers: {
@@ -23,7 +23,7 @@ export class ProjectService {
         return res;
     }
 
-    async createUser(project: Project): AxiosPromise<Project> {
+    async create(project: Project): AxiosPromise<Project> {
         const res = await axiosInstance.post("projects/", 
             project,
             {
@@ -33,7 +33,7 @@ export class ProjectService {
                 }
             }
         )
-
+    
         return res;
     }
 
@@ -46,6 +46,7 @@ export class ProjectService {
                 }
             }
         );
+    
         return res;
     }
 

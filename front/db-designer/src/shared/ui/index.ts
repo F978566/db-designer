@@ -1,3 +1,4 @@
+export { DialogWindow } from "./DialogWindow/DialogWindow";
 export { LiButtonsHorizontalList } from "./LiButtonsHorizontalList/LiButtonsHorizontalList";
 export { Error } from "./Error/Error";
 export { LoadBar } from "./LoadBar/LoadBar";
@@ -17,4 +18,5 @@ export {
     DeleteSvg,
     MenuSvg,
     ResetPasswordSvg,
+    CrossSvg,
 } from "./SVGs/SVGs";

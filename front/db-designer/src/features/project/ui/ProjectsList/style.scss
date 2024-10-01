@@ -3,12 +3,13 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 80%;
 }
 
 .project-list-container {
     background-color: var(--background-color);
     height: 90%;
-    width: 80%;
+    width: 100%;
     padding: 40px;
     border-radius: 10px;
     overflow-y: auto;

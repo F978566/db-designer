@@ -5,4 +5,4 @@ export {
 
 } from "./user";
 export { UserFeaturesList } from "./user";
-export { ProjectsList } from "./project";
+export { ProjectsList, AdditionalActions } from "./project";

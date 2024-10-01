@@ -7,7 +7,7 @@ import "./style.scss"
 
 export const TestPage = observer(() => {
     useEffect(() => {
-        project.getProjects();
+        project.getAll();
     }, [])
 
     return (

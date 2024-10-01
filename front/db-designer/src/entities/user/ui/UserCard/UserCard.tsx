@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { Info } from "@/shared/ui";
-import { User } from "../../model";
+import { User } from "../../model/user";
 import "./style.scss";
 
 
