@@ -3,24 +3,24 @@ import { observer } from "mobx-react-lite";
 
 import { Form, Input, Button, ErrorList } from "@/shared/ui";
 import { User as UserType } from "@/shared/types";
-import { User, UserStatus } from "@/entities";
+import { UserModel, UserStatus } from "@/entities";
 import { LoadBar } from "@/shared/ui";
 import { useNavigate } from "react-router-dom";
 
 
-export const RegisterForm = observer(({ user }: { user: User }) => {
+export const RegisterForm = observer(({ userModel }: { userModel: UserModel }) => {
     const { register, handleSubmit } = useForm<UserType>();
     const navigate = useNavigate();
 
     const handleSub = async (data: UserType) => {
         if (data.password === data.re_password) {
-            await user.registerUser(data);
+            await userModel.registerUser(data);
         }
     }
 
-    if (user.status === UserStatus.LOADING) {
+    if (userModel.status === UserStatus.LOADING) {
         return <LoadBar />;
-    } else if (user.status === UserStatus.SIGNUP) {
+    } else if (userModel.status === UserStatus.SIGNUP) {
         navigate("/login");
     }
 
@@ -31,7 +31,7 @@ export const RegisterForm = observer(({ user }: { user: User }) => {
             <Input placeholder="Surname" {...register("last_name", { required: true })} />
             <Input placeholder="Password" type="password" {...register("password", { required: true })} />
             <Input placeholder="Password once again" type="password" {...register("re_password", { required: true })} />
-            {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+            {userModel.status === UserStatus.ERROR && <ErrorList errors={userModel.errors} />}
             <Button type="submit">Sign-up</Button>
         </Form>
     )

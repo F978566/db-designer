@@ -6,16 +6,16 @@ import {
     LiButtonsHorizontalList,
     ResetPasswordSvg,
 } from "@/shared/ui";
-import { User } from "@/entities";
+import { UserModel } from "@/entities";
 
 
-export const UserFeaturesList = observer(({ user }: { user: User }) => {
+export const UserFeaturesList = observer(({ userModel }: { userModel: UserModel }) => {
     return (
         <LiButtonsHorizontalList>
             <LiButton to="/delete-profile">
                 <DeleteSvg />
             </LiButton>
-            <LiButton to="/" onClick={() => user.resetPassword()}>
+            <LiButton to="/" onClick={() => userModel.resetPassword()}>
                 <ResetPasswordSvg />
             </LiButton>
         </LiButtonsHorizontalList>

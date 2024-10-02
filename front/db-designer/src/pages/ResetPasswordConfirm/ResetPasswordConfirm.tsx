@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import { ResetPasswordConfirmForm } from "@/features/user";
-import { user } from "@/entities";
+import { userModel } from "@/entities";
 import "./style.scss";
 
 export const ResetPasswordConfirm = () => {
@@ -9,7 +9,7 @@ export const ResetPasswordConfirm = () => {
 
     return (
         <div className="reset-password-wrapper">
-            <ResetPasswordConfirmForm user={user} uid={uid} token={token} />
+            <ResetPasswordConfirmForm userModel={userModel} uid={uid} token={token} />
         </div>
     )
 }

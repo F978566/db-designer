@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-import { user } from "@/entities";
+import { userModel } from "@/entities";
 import { Navbar } from "@/widgets";
 import { observer } from "mobx-react-lite";
 
 
 export const Layout = observer(() => {
-    user.checkAuth();
+    userModel.checkAuth();
 
     return (
         <>

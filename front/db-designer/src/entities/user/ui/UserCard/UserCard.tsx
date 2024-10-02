@@ -1,23 +1,23 @@
 import { observer } from "mobx-react-lite";
 
 import { Info } from "@/shared/ui";
-import { User } from "../../model/user";
+import { UserModel } from "../../model/user";
 import "./style.scss";
 
 
-export const UserCard = observer(({ user }: { user: User }) => {
+export const UserCard = observer(({ userModel }: { userModel: UserModel }) => {
     return (
         <div className="profile">
             <Info
-                mainInfoText={`${user.user.first_name} ${user.user.last_name}`}
-                minorInfoText={`id: ${user.user.id}`}
+                mainInfoText={`${userModel.user.first_name} ${userModel.user.last_name}`}
+                minorInfoText={`id: ${userModel.user.id}`}
                 >
                 <Info.MainInfo />
                 <Info.MinorInfo />
             </Info>
             <Info
                 mainInfoText="Email"
-                minorInfoText={`${user.user.email}`}
+                minorInfoText={`${userModel.user.email}`}
                 >
                 <Info.MainInfo />
                 <Info.MinorInfo />

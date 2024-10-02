@@ -3,19 +3,19 @@ import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 
 import { PostToken } from "@/shared/types";
-import { User } from "@/entities";
+import { UserModel } from "@/entities";
 import { Input, Form, Button, LoadBar } from "@/shared/ui";
 import { UserStatus } from "@/entities/user";
 import { ErrorList } from "@/shared/ui";
 
-export const LoginForm = observer(({ user }: { user: User }) => {
+export const LoginForm = observer(({ userModel }: { userModel: UserModel }) => {
     const { register, handleSubmit } = useForm<PostToken>();
 
     const handleSub = async (data: PostToken) => {
-        await user.userLogin(data);
+        await userModel.userLogin(data);
     }
 
-    if (user.status === UserStatus.LOADING) {
+    if (userModel.status === UserStatus.LOADING) {
         return <LoadBar />;
     }
 
@@ -38,8 +38,8 @@ export const LoginForm = observer(({ user }: { user: User }) => {
                 />
                 <Button type="submit">Login</Button>
                 <a href="/sign-up">Sign-up</a>
-                {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
-                {user.status === UserStatus.LOGIN && <Navigate to="/" />}
+                {userModel.status === UserStatus.ERROR && <ErrorList errors={userModel.errors} />}
+                {userModel.status === UserStatus.LOGIN && <Navigate to="/" />}
             </Form>
         </>
     )

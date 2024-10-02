@@ -1,22 +1,22 @@
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 
-import { User, UserStatus } from "@/entities";
+import { UserModel, UserStatus } from "@/entities";
 import { Button, Form, Input, LoadBar } from "@/shared/ui";
 import { useNavigate } from "react-router-dom";
 
 
-export const ResetPasswordConfirmForm = observer(({ user, uid, token }: { user: User, uid: string, token: string }) => {
+export const ResetPasswordConfirmForm = observer(({ userModel, uid, token }: { userModel: UserModel, uid: string, token: string }) => {
     const { register, handleSubmit } = useForm<{ new_password: string }>();
     const navigate = useNavigate();
 
     const handleSub = async (data: { new_password: string }) => {
-        await user.resetPasswordConfirm({ ...data, uid, token });
+        await userModel.resetPasswordConfirm({ ...data, uid, token });
     }
 
-    if (user.status === UserStatus.LOADING) {
+    if (userModel.status === UserStatus.LOADING) {
         return <LoadBar />;
-    } else if (user.status === UserStatus.RESETPASSWORDCONFIRM) {
+    } else if (userModel.status === UserStatus.RESETPASSWORDCONFIRM) {
         navigate("/login");
     }
 

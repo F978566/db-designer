@@ -3,34 +3,34 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, ErrorList, LoadBar } from "@/shared/ui";
 import { UserActivate } from "@/shared/types";
-import { User, UserStatus } from "@/entities";
+import { UserModel, UserStatus } from "@/entities";
 import "./style.scss";
 
 type UserActivateContainerProps = UserActivate & {
-    user: User;
+    userModel: UserModel ;
 }
 
-export const UserActivateContainer = observer(({ uid, token, user }: UserActivateContainerProps) => {
+export const UserActivateContainer = observer(({ uid, token, userModel }: UserActivateContainerProps) => {
     const navigate = useNavigate();
 
     const handleSub = async ({ uid, token }: UserActivate) => {
-        await user.userActivate({ uid, token })
+        await userModel.userActivate({ uid, token })
     }
 
-    if (user.status === UserStatus.LOADING) {
+    if (userModel.status === UserStatus.LOADING) {
         return (
             <div className="container">
                 <LoadBar />
             </div>
         )
-    } else if (user.status === UserStatus.ACTIVATE) {
+    } else if (userModel.status === UserStatus.ACTIVATE) {
         navigate("/");
     }
 
     return (
         <div className="container">
             <Button onClick={() => handleSub({ uid, token })}>Activate</Button>
-            {user.status === UserStatus.ERROR && <ErrorList errors={user.errors} />}
+            {userModel.status === UserStatus.ERROR && <ErrorList errors={userModel.errors} />}
         </div>
     )
 })

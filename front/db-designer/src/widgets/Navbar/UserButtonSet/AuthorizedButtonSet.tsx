@@ -5,7 +5,7 @@ import {
     ProfileSVG,
     LogoutSVG,
 } from "@/shared/ui";
-import { user } from "@/entities";
+import { userModel } from "@/entities";
 
 
 export const AuthorizedButtonSet = observer(() => {
@@ -15,7 +15,7 @@ export const AuthorizedButtonSet = observer(() => {
                 <ProfileSVG />
             </LiButton>
             <LiButton to="login/">
-                <LogoutSVG onClick={() => user.logout()} />
+                <LogoutSVG onClick={() => userModel.logout()} />
             </LiButton>
         </>
     )

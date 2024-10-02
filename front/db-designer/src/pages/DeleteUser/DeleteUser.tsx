@@ -1,4 +1,4 @@
-import { user } from "@/entities"
+import { userModel } from "@/entities"
 import { DeleteUserForm } from "@/features"
 import "./style.scss";
 
@@ -6,7 +6,7 @@ import "./style.scss";
 export const DeleteUser = () => {
     return (
         <div className="delete-user-wrapper">
-            <DeleteUserForm user={user}/>
+            <DeleteUserForm userModel={userModel}/>
         </div>
     )
 }
