@@ -50,7 +50,16 @@ export class ProjectService {
         return res;
     }
 
-    // async deleteProjects(id:)
+    async delete(id: number) {
+        await axiosInstance.delete(`/projeects/${id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                }
+            }
+        )
+    }
 }
 
 container.register(ProjectService, { useClass: ProjectService });

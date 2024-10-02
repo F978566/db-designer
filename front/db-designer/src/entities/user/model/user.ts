@@ -13,7 +13,7 @@ import { UserStatus } from "./types";
 
 
 @injectable()
-export class User {
+export class UserModel {
     user: UserType = {
         id: undefined,
         first_name: "",
@@ -204,4 +204,4 @@ export class User {
     }
 }
 
-export const user = container.resolve(User);
+export const userModel = container.resolve(UserModel);

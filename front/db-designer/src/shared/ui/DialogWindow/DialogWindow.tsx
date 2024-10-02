@@ -12,13 +12,13 @@ type DialogWindowProps = PropsWithChildren & DialogHTMLAttributes<HTMLDialogElem
 
 export const DialogWindow = ({ isOpen, children, onClose, ...props }: DialogWindowProps) => {
     const dialogRef = useRef<HTMLDialogElement | null>(null);
-    const [isModalOpen, setModalOpen] = useState(isOpen);
+    const [isDialogOpen, setDialogOpen] = useState(isOpen);
 
     const handleCloseModal = () => {
         if (onClose) {
             onClose();
         }
-        setModalOpen(false);
+        setDialogOpen(false);
     };
     
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
@@ -28,7 +28,7 @@ export const DialogWindow = ({ isOpen, children, onClose, ...props }: DialogWind
     };
 
     useEffect(() => {
-        setModalOpen(isOpen);
+        setDialogOpen(isOpen);
     }, [isOpen]);
 
 
@@ -36,13 +36,13 @@ export const DialogWindow = ({ isOpen, children, onClose, ...props }: DialogWind
         const modalElement = dialogRef.current;
 
         if (modalElement) {
-            if (isModalOpen) {
+            if (isDialogOpen) {
                 modalElement.showModal();
             } else {
                 modalElement.close();
             }
         }
-    }, [isModalOpen]);
+    }, [isDialogOpen]);
 
     return (
         <dialog ref={dialogRef} onKeyDown={handleKeyDown} className="dialog-window" {...props}>

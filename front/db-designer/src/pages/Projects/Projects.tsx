@@ -1,12 +1,12 @@
 import { ProjectsList, AdditionalActions } from "@/features";
-import { project } from "@/entities";
+import { projectModel } from "@/entities";
 import "./style.scss";
 
 
 export const Projects = () => {
     return (
         <div className="project-page-wrapper">
-            <ProjectsList projects={project} />
+            <ProjectsList projectModel={projectModel} />
             <AdditionalActions />
         </div>
     )

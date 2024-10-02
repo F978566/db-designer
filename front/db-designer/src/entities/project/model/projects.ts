@@ -6,7 +6,7 @@ import { ProjectStatus } from "./tpyes";
 
 
 @injectable()
-export class Projects {
+export class ProjectModel {
     projects: Project[] = [];
     status: ProjectStatus = ProjectStatus.NOTHING;
     errors: string[] = [];
@@ -53,6 +53,24 @@ export class Projects {
         }
     }
 
+    async delete(id: number) {
+        runInAction(() => {
+            this.setStatus(ProjectStatus.LOADING);
+        })
+        try {
+            await this.projectRepository.delete(id);
+            runInAction(() => {
+                this.setStatus(ProjectStatus.FULFILLED);
+            })
+            
+        } catch (err) {
+            runInAction(() => {
+                this.setStatus(ProjectStatus.ERROR);
+                this.setErrors(["Error during creating the project"]);
+            })
+        }
+    }
+
     setProjects(projects: Project[]) {
         this.projects = projects;
     }
@@ -66,4 +84,4 @@ export class Projects {
     }
 }
 
-export const project = container.resolve(Projects);
+export const projectModel = container.resolve(ProjectModel);

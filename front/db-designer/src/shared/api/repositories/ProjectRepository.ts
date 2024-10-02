@@ -18,7 +18,9 @@ export class ProjectRepository implements IProjectRepository {
     
     async update(id: number, data: Project) {}
     
-    async delete(id: number) {}
+    async delete(id: number) {
+        await this.projectService.delete(id);
+    }
     
 }
 

@@ -4,17 +4,17 @@ import { observer } from "mobx-react-lite";
 
 import { Button, DialogWindow, ErrorList, Form, Input, LoadBar } from "@/shared/ui";
 import { Project } from "@/shared/types";
-import { Projects, User } from "@/entities";
+import { ProjectModel, UserModel } from "@/entities";
 import { ProjectStatus } from "@/entities/project/model/tpyes";
 import { useNavigate } from "react-router-dom";
 
-export const CreateProjectDialog = observer(({ project, user }: { project: Projects, user: User }) => {
+export const CreateProjectDialog = observer(({ project, userModel }: { project: ProjectModel, userModel: UserModel }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm<Project>();
     const navigate = useNavigate();
     
     const handleSub = async (data: Project) => {
-        await project.create({...data, user: user.user.id});
+        await project.create({...data, user: userModel.user.id});
         if (project.status === ProjectStatus.FULFILLED) {
             navigate("/");
         }

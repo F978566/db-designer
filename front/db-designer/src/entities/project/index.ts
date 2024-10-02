@@ -1,3 +1,3 @@
 export { ProjectCard } from "./ui/ProjectCard/Project";
-export { project } from "./model/projects";
-export { Projects } from "./model/projects";
+export { projectModel } from "./model/projects";
+export { ProjectModel } from "./model/projects";
