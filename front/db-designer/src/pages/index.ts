@@ -7,3 +7,4 @@ export { TestPage } from "@/pages/TestPage/TetsPage";
 export { Login } from "./Login/Login";
 export { Activate } from "./Activate/Activate";
 export { DeleteUser } from "./DeleteUser/DeleteUser";
+export { Project } from "./Project/Project";

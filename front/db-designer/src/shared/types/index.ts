@@ -1,4 +1,6 @@
-export type { IBaseRepository } from './BaseRepository';
+export type { ITableRepository } from "./table/ITableRepository";
+export type { TableType } from "./table/table";
+export type { IBaseRepository } from "./BaseRepository";
 export type { IUserRepository } from "./user/IUserRepository";
 export type { User } from "./user/user";
 export type { PostToken, ObtainToken } from "./user/token";

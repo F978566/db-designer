@@ -1,0 +1,16 @@
+.circle_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    background-color: rgb(252, 250, 250);
+    border-radius: 100vh;
+    width: 5vh;
+    height: 5vh;
+    transition: transform .2s;
+}
+
+.circle_button:hover {
+    background-color: var(--background-color-hover);
+    transform: scale(1.05);
+}

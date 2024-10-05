@@ -14,6 +14,7 @@ import {
     DeleteUser,
     ResetPasswordConfirm,
     Projects,
+    Project,
 } from "@/pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -27,6 +28,7 @@ export const router = createBrowserRouter(
                 <Route path="/delete-profile" element={<DeleteUser />} />
                 <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/project/:id" element={<Project />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUpPage />} />

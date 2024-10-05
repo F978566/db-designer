@@ -16,7 +16,7 @@ export const ProjectsList =  observer(({ projectModel }: { projectModel: Project
                 {
                     projectModel.projects.map(project => {
                         return (
-                            <ProjectCard key={project.id} project={project}/>
+                            <ProjectCard projectModel={projectModel} key={project.id} project={project}/>
                         )
                     })
                 }

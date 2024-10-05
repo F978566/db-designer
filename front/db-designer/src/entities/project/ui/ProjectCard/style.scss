@@ -3,11 +3,18 @@
     border-radius: 10px;
     padding: 20px;
     transition: ease .3s;
-    display: felx;
-    justify-content: space-between;
-    align-items: center;
+    display: flex;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 .project-card-wrapper:hover {
     transform: scale(1.05);
+}
+
+.project-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }

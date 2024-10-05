@@ -1,25 +1,51 @@
 import { injectable, inject, container } from "tsyringe";
 
-import { ProjectService } from "../services/ProjectService";
 import { Project, IProjectRepository } from "@/shared/types";
+import type { AxiosInstance } from "axios";
+import { AxiosInstanceToken } from "../base";
 
 
 @injectable()
 export class ProjectRepository implements IProjectRepository {
-    constructor(@inject(ProjectService) private projectService: ProjectService) {}
+    constructor (@inject(AxiosInstanceToken) private axiosInstance: AxiosInstance) {}
     
     async getAll() {
-        return (await this.projectService.fetchAll()).data;
+        const res = await this.axiosInstance.get<Project[]>("projects/", 
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                }
+            }
+        );
+        return res.data;
     }
     
     async create(data: Project) {
-        return (await this.projectService.create(data)).data;
+        const res = await this.axiosInstance.post("projects/", 
+            data,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                }
+            }
+        )
+    
+        return res.data;
     }
     
     async update(id: number, data: Project) {}
     
     async delete(id: number) {
-        await this.projectService.delete(id);
+        await this.axiosInstance.delete(`/projects/${id}/`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                }
+            }
+        );
     }
     
 }

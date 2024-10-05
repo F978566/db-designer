@@ -1,3 +1,4 @@
+export { TableModel, TableStatus } from "./table";
 export {
     ProjectCard,
     projectModel,
