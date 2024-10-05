@@ -10,7 +10,7 @@ export class TableRepository implements ITableRepository {
     constructor (@inject(AxiosInstanceToken) private axiosInstance: AxiosInstance) {}
 
     async getAll(id: number): Promise<TableType[]> {
-        const res = await this.axiosInstance.get<TableType[]>(`/tables/project-tables/${id}/`, 
+        const res = await this.axiosInstance.get<TableType[]>(`/tables/project-tables/${id}/`,
             {
                 headers: {
                     "Content-Type": "application/json",

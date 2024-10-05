@@ -1,3 +1,4 @@
+export { TableCard } from "./table/ui/TableCard/TableCard";
 export { TableModel, TableStatus } from "./table";
 export {
     ProjectCard,
