@@ -1,3 +1,4 @@
+export { CreateTableDialog } from "./tables/ui/CreateTableDialog/CreateTableDialog";
 export {
     LoginForm,
     RegisterForm,

@@ -6,8 +6,7 @@ import { TableModel } from "@/entities";
 import { ColumnsList } from "@/features/column/ui/ColumnsList/ColumnsList";
 import { columnModel } from "@/entities/column/model/column";
 import { LoadBar } from "@/shared/ui";
-import { CreateTableDialog } from "../CreateTableDialog/CreateTableDialog";
-import "./style.scss"
+// import "./style.scss"
 
 export const TableList = observer(({ projectId, tableModel }: { projectId: number, tableModel: TableModel }) => {
     useEffect(() => {
@@ -18,7 +17,7 @@ export const TableList = observer(({ projectId, tableModel }: { projectId: numbe
         return <LoadBar />
 
     return (
-        <div className="table-list-wrapper">
+        <>
             {
                 tableModel.tables?.map(
                     table => {
@@ -30,7 +29,6 @@ export const TableList = observer(({ projectId, tableModel }: { projectId: numbe
                     }
                 )
             }
-            <CreateTableDialog tableModel={tableModel} projectId={projectId}/>
-        </div>
+        </>
     )
 })

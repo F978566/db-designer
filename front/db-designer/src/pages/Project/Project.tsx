@@ -1,9 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 
-import { tableModel } from "@/entities/table";
-import { TableList } from "@/features/tables/ui/TablesList/TableList";
 import "./style.scss";
+import { SidebarTable } from "@/widgets";
 
 
 export const Project = observer(() => {
@@ -11,7 +10,7 @@ export const Project = observer(() => {
 
     return (
         <div className="project-wrapper">
-            <TableList projectId={Number.parseInt(id)} tableModel={tableModel}/>
+            <SidebarTable projectId={Number.parseInt(id)}/>
         </div>
     )
 })

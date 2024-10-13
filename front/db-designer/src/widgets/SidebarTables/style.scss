@@ -1,4 +1,4 @@
-.table-list-wrapper {
+.sidebar-wrapper {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -11,6 +11,6 @@
     scroll-behavior: smooth;
 }
 
-.table-list-wrapper>div {
+.sidebar-wrapper>div {
     margin-bottom: 10px;
 }
