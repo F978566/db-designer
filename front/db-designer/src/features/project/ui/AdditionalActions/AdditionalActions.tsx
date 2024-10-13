@@ -5,7 +5,7 @@ import "./style.scss";
 export const AdditionalActions = () => {
     return (
         <div className="additional-actions">
-            <CreateProjectDialog project={projectModel} userModel={userModel}/>
+            <CreateProjectDialog projectModel={projectModel} userModel={userModel}/>
         </div>
     )
 }

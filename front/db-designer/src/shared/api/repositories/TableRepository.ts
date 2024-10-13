@@ -23,7 +23,7 @@ export class TableRepository implements ITableRepository {
     }
 
     async create(data: TableType): Promise<TableType> {
-        const res = await this.axiosInstance.post<TableType>("/tables/project-tables/",
+        const res = await this.axiosInstance.post<TableType>("/tables/",
             data,
             {
                 headers: {
@@ -32,7 +32,6 @@ export class TableRepository implements ITableRepository {
                 },
             }
         )
-
         return res.data;
     }
 

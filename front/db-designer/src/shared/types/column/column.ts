@@ -3,4 +3,9 @@ export type ColumnType = {
     name: string;
     description?: string;
     table: number;
+    data_type: string;
+    is_primary_key: boolean;
+    is_nullable: boolean;
+    is_relationship: boolean;
+    created_at: string;
 }

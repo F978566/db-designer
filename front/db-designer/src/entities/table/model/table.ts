@@ -34,6 +34,25 @@ export class TableModel {
         }
     }
 
+    async create(data: TableType) {
+        runInAction(() => {
+            this.setStatus(TableStatus.LOADING);
+        })
+        try {
+            const res = await this.tableRepository.create(data);
+            runInAction(() => {
+                this.setStatus(TableStatus.FULFILLED);
+
+            })
+        } catch (err: any) {
+            console.log(err);
+            runInAction(() => {
+                this.setStatus(TableStatus.ERROR);
+                this.setError(["Failed create table =("]);
+            })
+        }
+    }
+
     setStatus(newStatus: TableStatus) {
         this.status = newStatus;
     }

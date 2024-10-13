@@ -5,8 +5,9 @@ import { TableCard, TableStatus } from "@/entities";
 import { TableModel } from "@/entities";
 import { ColumnsList } from "@/features/column/ui/ColumnsList/ColumnsList";
 import { columnModel } from "@/entities/column/model/column";
-import "./style.scss"
 import { LoadBar } from "@/shared/ui";
+import { CreateTableDialog } from "../CreateTableDialog/CreateTableDialog";
+import "./style.scss"
 
 export const TableList = observer(({ projectId, tableModel }: { projectId: number, tableModel: TableModel }) => {
     useEffect(() => {
@@ -23,12 +24,13 @@ export const TableList = observer(({ projectId, tableModel }: { projectId: numbe
                     table => {
                         return (
                             <TableCard key={table.id} table={table}>
-                                <ColumnsList tableId={table.id} columnModel={columnModel}/>
+                                <ColumnsList tableId={table?.id ?? 0} columnModel={columnModel}/>
                             </TableCard>
                         )
                     }
                 )
             }
+            <CreateTableDialog tableModel={tableModel} projectId={projectId}/>
         </div>
     )
 })
