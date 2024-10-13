@@ -1,3 +1,5 @@
+export type { IColumnRepository } from "./column/IColumnRepository";
+export type { ColumnType } from "./column/column";
 export type { ITableRepository } from "./table/ITableRepository";
 export type { TableType } from "./table/table";
 export type { IBaseRepository } from "./BaseRepository";

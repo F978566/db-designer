@@ -36,11 +36,7 @@ export class TableRepository implements ITableRepository {
         return res.data;
     }
 
-    async update(id: number, data: TableType): Promise<void> {
-        
-    }
+    async update(id: number, data: TableType): Promise<void> {}
 
-    async delete(id: number): Promise<void> {
-        
-    }
+    async delete(id: number): Promise<void> {}
 }

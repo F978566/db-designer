@@ -1,16 +1,30 @@
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
-import { TableCard } from "@/entities";
+import { TableCard, TableStatus } from "@/entities";
 import { TableModel } from "@/entities";
+import { ColumnsList } from "@/features/column/ui/ColumnsList/ColumnsList";
+import { columnModel } from "@/entities/column/model/column";
+import "./style.scss"
+import { LoadBar } from "@/shared/ui";
 
-export const TableList = observer(({ tableModel }: { tableModel: TableModel }) => {
+export const TableList = observer(({ projectId, tableModel }: { projectId: number, tableModel: TableModel }) => {
+    useEffect(() => {
+        tableModel.get(projectId);
+    }, [projectId])
+
+    if (tableModel.status === TableStatus.LOADING)
+        return <LoadBar />
+
     return (
         <div className="table-list-wrapper">
             {
                 tableModel.tables?.map(
                     table => {
                         return (
-                            <TableCard key={table.id} table={table} />
+                            <TableCard key={table.id} table={table}>
+                                <ColumnsList tableId={table.id} columnModel={columnModel}/>
+                            </TableCard>
                         )
                     }
                 )

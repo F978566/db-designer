@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { container, injectable, inject } from "tsyringe";
 
-import type { IBaseRepository, Project } from "@/shared/types";
+import type { IProjectRepository, Project } from "@/shared/types";
 import { ProjectStatus } from "./tpyes";
 
 
@@ -10,9 +10,9 @@ export class ProjectModel {
     projects: Project[] = [];
     status: ProjectStatus = ProjectStatus.NOTHING;
     errors: string[] = [];
-    private projectRepository: IBaseRepository<Project>;
+    private projectRepository: IProjectRepository;
 
-    constructor(@inject("IProjectRepository") projectRepository: IBaseRepository<Project>) {
+    constructor(@inject("IProjectRepository") projectRepository: IProjectRepository) {
         this.projectRepository = projectRepository;
         makeAutoObservable(this);
     }

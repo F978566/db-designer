@@ -1,4 +1,16 @@
 .table-list-wrapper {
     display: flex;
     flex-direction: column;
+    padding: 10px;
+    background-color: var(--background-color);
+    height: 95vh;
+    width: 250px;
+    align-items: center;
+    border-radius: 10px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.table-list-wrapper>div {
+    margin-bottom: 10px;
 }

@@ -1,3 +1,6 @@
+export { ColumnCard } from "./column/ui/ColumnCard/ColumnCard";
+export { ColumnStatus } from "./column/model/types";
+export { ColumnModel } from "./column/model/column";
 export { TableCard } from "./table/ui/TableCard/TableCard";
 export { TableModel, TableStatus } from "./table";
 export {
