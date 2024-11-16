@@ -1,0 +1,29 @@
+.column-input-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.column-input {
+    all: unset;
+    width: 60%;
+    border-bottom: 1px black solid;
+}
+
+.show-settings-svg {
+    width: 10%;
+    height: 10%;
+}
+
+.settings-input {
+    animation: 0.1s show ease-out;
+}
+
+.settings-input > div > * {
+    padding: 10px;
+}
+
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

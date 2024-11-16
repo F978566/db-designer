@@ -1,3 +1,4 @@
+export { Dropdown } from "./Dropdown/Dropdown";
 export { CircleButton } from "./CircleButton/CircleButton";
 export { DialogWindow } from "./DialogWindow/DialogWindow";
 export { LiButtonsHorizontalList } from "./LiButtonsHorizontalList/LiButtonsHorizontalList";
@@ -20,4 +21,5 @@ export {
     MenuSvg,
     ResetPasswordSvg,
     CrossSvg,
+    ArrowDownSvg,
 } from "./SVGs/SVGs";

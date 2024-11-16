@@ -1,16 +1,22 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 
-import { TableCard, TableStatus } from "@/entities";
+import { TableStatus } from "@/entities";
 import { TableModel } from "@/entities";
-import { ColumnsList } from "@/features/column/ui/ColumnsList/ColumnsList";
 import { columnModel } from "@/entities/column/model/column";
 import { LoadBar } from "@/shared/ui";
-// import "./style.scss"
+import { EditTableDialog } from "@/features/tables/ui/EditTableDialog/EditTableDialog";
+import { EnrichedTableCard } from "../EnrichedTableCard/EnrichedTableCard";
+import "./style.scss";
+
 
 export const TableList = observer(({ projectId, tableModel }: { projectId: number, tableModel: TableModel }) => {
     useEffect(() => {
         tableModel.get(projectId);
+    }, [projectId])
+
+    useEffect(() => {
+        columnModel.getProjectColumns(projectId ?? 0);
     }, [projectId])
 
     if (tableModel.status === TableStatus.LOADING)
@@ -22,9 +28,12 @@ export const TableList = observer(({ projectId, tableModel }: { projectId: numbe
                 tableModel.tables?.map(
                     table => {
                         return (
-                            <TableCard key={table.id} table={table}>
-                                <ColumnsList tableId={table?.id ?? 0} columnModel={columnModel}/>
-                            </TableCard>
+                            <div key={table.id}>
+                                <EnrichedTableCard table={table} columnModel={columnModel}>
+                                    <EnrichedTableCard.ColumnList />
+                                </EnrichedTableCard>
+                                <EditTableDialog table={table} tableModel={tableModel}/>
+                            </div>
                         )
                     }
                 )

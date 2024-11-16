@@ -42,7 +42,17 @@ export class ColumnRepository implements IColumnRepository {
         )).data;
     }
 
-    async update(id: number, data: ColumnType): Promise<void> {}
+    async update(id: number, data: ColumnType): Promise<void> {
+        return (await this.axiosInstance.patch(`/columns/${id}`,
+            data,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                }
+            }
+        )).data;
+    }
 
     async delete(id: number): Promise<void> {}
 }

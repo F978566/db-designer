@@ -35,7 +35,18 @@ export class TableRepository implements ITableRepository {
         return res.data;
     }
 
-    async update(id: number, data: TableType): Promise<void> {}
+    async update(id: number, data: TableType): Promise<void> {
+        this.axiosInstance.patch(`/tables/${id}`, data);
+    }
 
-    async delete(id: number): Promise<void> {}
+    async delete(id: number): Promise<void> {
+        await this.axiosInstance.delete(`/tables/${id}/`, 
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `JWT ${localStorage.getItem("accessToken")}`,
+                },
+            }
+        )
+    }
 }

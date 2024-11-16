@@ -53,6 +53,38 @@ export class TableModel {
         }
     }
 
+    async update(data: TableType) {
+        runInAction(() => {
+            this.setStatus(TableStatus.LOADING);
+        })
+        try {
+            await this.tableRepository.update(data.id ? data.id : -1, data);
+            runInAction(() => {
+                this.setStatus(TableStatus.FULFILLED);
+            })
+        } catch {
+            runInAction(() => {
+                this.setStatus(TableStatus.ERROR);
+            })
+        }
+    }
+
+    async delete(id: number) {
+        runInAction(() => {
+            this.setStatus(TableStatus.LOADING);
+        })
+        try {
+            await this.tableRepository.delete(id);
+            runInAction(() => {
+                this.setStatus(TableStatus.FULFILLED);
+            })
+        } catch {
+            runInAction(() => {
+                this.setStatus(TableStatus.ERROR);
+            })
+        }
+    }
+
     setStatus(newStatus: TableStatus) {
         this.status = newStatus;
     }
