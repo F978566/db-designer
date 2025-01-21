@@ -1,7 +1,7 @@
 .dialog-window {
     position: relative;
-    width: 40vw;
-    height: 40vh;
+    min-width: 40vw;
+    min-height: 40vh;
     background-color: var(--background-color);
     left: calc(50vw - 20vw);
     top: calc(50vw - 40vw);

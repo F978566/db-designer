@@ -1,31 +1,41 @@
 import { useState } from "react";
 
 import { TableType } from "@/shared/types";
-import { Button, CircleButton, DeleteSvg, DialogWindow } from "@/shared/ui";
-import { columnModel } from "@/entities/column/model/column";
+import { Button, DialogWindow } from "@/shared/ui";
 import { EnrichedTableCard } from "../EnrichedTableCard/EnrichedTableCard";
-import { TableModel } from "@/entities";
+import { EditTableActions } from "./EditTableActions";
+import { useTableListContext } from "../../util/useTableListContext";
 import "./style.scss";
 
 
-export const EditTableDialog = ({ table, tableModel }: { table: TableType, tableModel: TableModel }) => {
+export const EditTableDialog = ({ table }: { table: TableType }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { columnModel } = useTableListContext()
 
+    const defaultColumn = {
+        table: table.id,
+        name: "DefaultName",
+        data_type: 1,
+        data_type_name: "INT",
+        is_nullable: false,
+        is_relationship: false,
+        is_primary_key: false
+    }
 
     return (
         <div className="eidt-table-card">
             <Button onClick={() => setIsOpen(true)}>Edit</Button>
             <DialogWindow isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <div className="edit-table-content">
-                    <EnrichedTableCard table={table} columnModel={columnModel}>
+                    <EnrichedTableCard table={table}>
                         <EnrichedTableCard.ColumnInputList />
+                            <button
+                                onClick={() => columnModel.add(defaultColumn)}
+                            >
+                                Add
+                            </button>
                     </EnrichedTableCard>
-                    <CircleButton>
-                        <DeleteSvg onClick={() => {
-                            tableModel.delete(table.id);
-                            window.location.reload();
-                        }} />
-                    </CircleButton>
+                    <EditTableActions table={table} />
                 </div>
             </DialogWindow>
         </div>

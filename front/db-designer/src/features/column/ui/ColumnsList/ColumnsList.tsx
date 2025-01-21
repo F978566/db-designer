@@ -1,24 +1,30 @@
 import { observer } from "mobx-react-lite";
 
-import { ColumnCard, ColumnModel, ColumnStatus } from "@/entities";
+import { ColumnCard, ColumnStatus } from "@/entities";
 import { PropsWithChildren } from "react";
 import { LoadBar } from "@/shared/ui";
+import { ColumnType } from "@/shared/types";
+import { useTableListContext } from "@/features/tables/util/useTableListContext";
 
 
 type ColumnListProps = PropsWithChildren & {
     tableId: number;
-    columnModel: ColumnModel;
 }
 
-export const ColumnsList = observer(({ children, tableId, columnModel }: ColumnListProps) => {
+export const ColumnsList = observer(({ tableId }: ColumnListProps) => {
+    const { columnModel } = useTableListContext()
+
     if (columnModel.status === ColumnStatus.LOADING)
         return <LoadBar />
+
+
+    let newColumns: ColumnType[] = columnModel.columns.filter(col => col.table === tableId)
 
     return (
         <>
             <>
                 {
-                    columnModel.columns.get(tableId ?? 0)?.map(column => {
+                    newColumns.map(column => {
                         return (
                             <ColumnCard key={column.id} column={column} />
                         )

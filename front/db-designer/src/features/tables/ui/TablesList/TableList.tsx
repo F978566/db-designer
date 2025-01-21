@@ -7,6 +7,7 @@ import { columnModel } from "@/entities/column/model/column";
 import { LoadBar } from "@/shared/ui";
 import { EditTableDialog } from "@/features/tables/ui/EditTableDialog/EditTableDialog";
 import { EnrichedTableCard } from "../EnrichedTableCard/EnrichedTableCard";
+import { TableListProvider } from "../../util/TableListProvider";
 import "./style.scss";
 
 
@@ -23,21 +24,21 @@ export const TableList = observer(({ projectId, tableModel }: { projectId: numbe
         return <LoadBar />
 
     return (
-        <>
+        <TableListProvider.Provider value={{tableModel, columnModel}}>
             {
                 tableModel.tables?.map(
                     table => {
                         return (
                             <div key={table.id}>
-                                <EnrichedTableCard table={table} columnModel={columnModel}>
+                                <EnrichedTableCard table={table}>
                                     <EnrichedTableCard.ColumnList />
                                 </EnrichedTableCard>
-                                <EditTableDialog table={table} tableModel={tableModel}/>
+                                <EditTableDialog table={table} />
                             </div>
                         )
                     }
                 )
             }
-        </>
+        </TableListProvider.Provider>
     )
 })

@@ -43,7 +43,7 @@ export class ColumnRepository implements IColumnRepository {
     }
 
     async update(id: number, data: ColumnType): Promise<void> {
-        return (await this.axiosInstance.patch(`/columns/${id}`,
+        return (await this.axiosInstance.patch(`/columns/${id}/`,
             data,
             {
                 headers: {

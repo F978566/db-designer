@@ -9,7 +9,7 @@ export const Dropdown = ({ initialValue, content } : { initialValue: string, con
                     content.map((v, i) => {
                         return (
                             <div key={i}>
-                                {v}
+                                {v.name}
                             </div>
                         )
                     })

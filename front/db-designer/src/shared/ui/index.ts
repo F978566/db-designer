@@ -22,4 +22,5 @@ export {
     ResetPasswordSvg,
     CrossSvg,
     ArrowDownSvg,
+    SaveSvg,
 } from "./SVGs/SVGs";

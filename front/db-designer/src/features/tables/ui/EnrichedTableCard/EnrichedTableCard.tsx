@@ -1,50 +1,33 @@
-import { ColumnModel, TableCard } from "@/entities";
+import { TableCard } from "@/entities";
 import { ColumnsInputList } from "@/features/column/ui/ColumnsInputList/ColumnsInputList";
 import { ColumnsList } from "@/features/column/ui/ColumnsList/ColumnsList";
-import { TableType } from "@/shared/types";
-import { PropsWithChildren, createContext, useContext } from "react";
+import { EnrichedTableCardProps } from "./EnrichedTableCardProps";
+import { EnrichedTableCardProvider } from "./EnrichedTableCardProvider";
+import { useEnrichedTableCardContext } from "./useEnrichedTableCardContext";
 
-
-type EnrichedTableCardProps = PropsWithChildren & {
-    table: TableType;
-    columnModel: ColumnModel;
-}
-
-
-const EnrichedTableCardProvider = createContext<EnrichedTableCardProps | null>(null);
-
-const useEnrichedTableCardContext = () => {
-    const context = useContext(EnrichedTableCardProvider);
-    
-    if (!context)
-        throw new Error("No context");
-
-    return context;
-}
-
-export const EnrichedTableCard = ({ children, table, columnModel }: EnrichedTableCardProps) => {
+export const EnrichedTableCard = ({ children, table }: EnrichedTableCardProps) => {
     return (
-        <EnrichedTableCardProvider.Provider value={{table, columnModel}}>
-            <TableCard table={table}>
-                {children}
-            </TableCard>
+        <EnrichedTableCardProvider.Provider value={{table}}>
+             <TableCard table={table}>
+                 {children}
+             </TableCard>
         </EnrichedTableCardProvider.Provider>
     )
 }
 
 EnrichedTableCard.ColumnList = () => {
-    const { table, columnModel } = useEnrichedTableCardContext();
+    const { table } = useEnrichedTableCardContext();
 
     return (
-        <ColumnsList tableId={table?.id ?? 0} columnModel={columnModel}/>
+        table.id ? <ColumnsList tableId={table.id} /> : <></>
     )
 }
 
 
 EnrichedTableCard.ColumnInputList = () => {
-    const { table, columnModel } = useEnrichedTableCardContext();
+    const { table } = useEnrichedTableCardContext();
 
     return (
-        <ColumnsInputList tableId={table?.id ?? 0} columnModel={columnModel}/>
+        table.id ? <ColumnsInputList tableId={table.id} /> : <></>
     )
 }
